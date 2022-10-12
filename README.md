@@ -85,3 +85,4 @@ This takes the database from `./TheGraphTextSubdomains/ScrapeTheGraphToJSON.py`,
 * Figure out somewhere else than infura where I can do all the ENS resolutions
 * We need to use JS for ethersjs but we do not need to use python so TheGraphToSQLITE.py can be rewritten in JS to reduce dependencies
 * Write scripts for people to use rather than exporting tables manually to CSV and JSON
+* This project does not support subdomains at this point
