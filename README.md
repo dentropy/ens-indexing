@@ -51,3 +51,4 @@ This takes the database from `./TheGraphTextSubdomains/ScrapeTheGraphToJSON.py`,
 * Find a better way to store the Infura Key, probably Environment Variables or a .env file
 * Figure out somewhere else than infura where I can do all the ENS resolutions
 * We need to use JS for ethersjs but we do not need to use python so TheGraphToSQLITE.py can be rewritten in JS to reduce dependencies
+* We need to write scripts to export the sqlite as JSON and CSV rather than assuming people know how to do it
