@@ -14,6 +14,7 @@ I may even be able to find a [ARG](https://www.thenewatlantis.com/publications/r
 
 * Python with requests package
 * Nodejs and NPM with ethersjs, sqlite, and sqlite3 packages
+* sqlite3
 * API's used
   * [ENS Subgraph](https://thegraph.com/hosted-service/subgraph/ensdomains/ens)
   * Ethereum API ([Infura](https://infura.io/) in this case)
@@ -30,6 +31,38 @@ npm install
 # For the next step you require an Ethereum REST endpoint to be added to the code
 # Please update line 11 from ResolvedSubdomains.js
 node ResolveSubdomains.js
+```
+
+#### Saving data as CSV
+
+``` bash
+# Enter one line at a time
+sqlite
+.open ENS_RECORDS.db
+.mode csv
+.headers on
+.output ENS_NAMES.csv
+select * from ENS_NAMES;
+.output stdout
+.output ens_records_resolved.csv
+select * from ens_records_resolved;
+.output stdout
+```
+
+#### Saving data as JSON
+
+``` bash
+# Enter one line at a time
+sqlite
+.open ENS_RECORDS.db
+.mode json
+.headers on
+.output ENS_NAMES.json
+select * from ENS_NAMES;
+.output stdout
+.output ens_records_resolved.json
+select * from ens_records_resolved;
+.output stdout
 ```
 
 ## Code Explanation
@@ -51,4 +84,4 @@ This takes the database from `./TheGraphTextSubdomains/ScrapeTheGraphToJSON.py`,
 * Find a better way to store the Infura Key, probably Environment Variables or a .env file
 * Figure out somewhere else than infura where I can do all the ENS resolutions
 * We need to use JS for ethersjs but we do not need to use python so TheGraphToSQLITE.py can be rewritten in JS to reduce dependencies
-* We need to write scripts to export the sqlite as JSON and CSV rather than assuming people know how to do it
+* Write scripts for people to use rather than exporting tables manually to CSV and JSON
