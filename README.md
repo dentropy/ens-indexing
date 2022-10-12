@@ -67,17 +67,13 @@ select * from ens_records_resolved;
 
 ## Code Explanation
 
-**./TheGraphTextSubdomains/ScrapeTheGraphToJSON.py**
+**./ScrapeTheGraphToSQLITE.py**
 
-Scrapes all ENS text records that are actually set
+Scrape all ENS text records from TheGraph via [ENS Subgraph](https://thegraph.com/hosted-service/subgraph/ensdomains/ens) that are actually set and store in sqlite database.
 
-**./TheGraphToSQLITE/JSONTOSqlite.py**
+**./ResolveSubdomains.js**
 
-`./TheGraphTextSubdomains/ScrapeTheGraphToJSON.py` transforms all the results from JSON into a sqlite database, this script just puts all those results into a sqlite database so it is easier to manage, query, update etc...
-
-**./TextSubdomainsResolved/ResolveSubdomains.js**
-
-This takes the database from `./TheGraphTextSubdomains/ScrapeTheGraphToJSON.py`, adds tables for ENS resolved and unresolved ENS records, then proceeds to resolve each record one by one storing them in the database.
+Takes the database setup from `./ScrapeTheGraphToSQLITE.py`, adds tables for resolved and unresolved ENS records, then proceeds to resolve each record one by one storing them in the database.
 
 ## Next Steps
 
