@@ -1,6 +1,6 @@
 # ens-indexing
 
-Get ENS names with text subdomains and what they resolve to, stored as sqlite, json, or CSV
+Get [ENS](https://ens.domains/) names with text subdomains and what they resolve to, stored as sqlite, json, or CSV
 
 ## Motivation
 
@@ -50,4 +50,5 @@ This takes the database from `./TheGraphTextSubdomains/ScrapeTheGraphToJSON.py`,
 
 ## Next Steps
 
-Merge `./TheGraphToSQLITE/JSONTOSqlite.py` and `./TheGraphTextSubdomains/ScrapeTheGraphToJSON.py` into a single script
+* Find a better way to store the Infura Key, probably Environment Variables or a .env file
+* Figure out somewhere else than infura where I can do all the ENS resolutions

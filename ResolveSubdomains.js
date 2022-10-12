@@ -138,7 +138,7 @@ async function main(){
 (async () => {
     // open the database
     const db = await open({
-      filename: '../TheGraphToSQLITE/ENS_RECORDS.db',
+      filename: './ENS_RECORDS.db',
       driver: sqlite3.Database
     })
 
