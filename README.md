@@ -13,7 +13,7 @@ I may even be able to find a [ARG](https://www.thenewatlantis.com/publications/r
 ## Tech/Framework used
 
 * Python with requests package
-* Nodejs with ethersjs, sqlite, and sqlite3 packages
+* Nodejs and NPM with ethersjs, sqlite, and sqlite3 packages
 * API's used
   * [ENS Subgraph](https://thegraph.com/hosted-service/subgraph/ensdomains/ens)
   * Ethereum API ([Infura](https://infura.io/) in this case)
@@ -24,13 +24,11 @@ The scripts are run in the following order
 
 ``` bash
 pip install requests
-cd ./TheGraphTextSubdomains && python3 ScrapeTheGraphToJSON.py
+python3 TheGraphToSQLITE.py
 # This should take about 10 minutes
-cd ..
-cd ./TheGraphToSQLITE && python3 JSONTOSqlite.py
-# For the next step you require an Ethereum REST endpoint to be added to the code
-cd ./TextSubdomainsResolved
 npm install
+# For the next step you require an Ethereum REST endpoint to be added to the code
+# Please update line 11 from ResolvedSubdomains.js
 node ResolveSubdomains.js
 ```
 
@@ -52,3 +50,4 @@ This takes the database from `./TheGraphTextSubdomains/ScrapeTheGraphToJSON.py`,
 
 * Find a better way to store the Infura Key, probably Environment Variables or a .env file
 * Figure out somewhere else than infura where I can do all the ENS resolutions
+* We need to use JS for ethersjs but we do not need to use python so TheGraphToSQLITE.py can be rewritten in JS to reduce dependencies
