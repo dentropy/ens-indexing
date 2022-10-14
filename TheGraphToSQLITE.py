@@ -9,7 +9,7 @@ cur = con.cursor()
 
 try:
     create_table = """
-        CREATE TABLE ENS_NAMES(
+        CREATE TABLE ens_names(
             ENS_RECORD_JSON
         )
     """
@@ -19,7 +19,7 @@ except Exception as e:
     s = str(e)
     print("Database is already created")
     tmp_query = """
-        SELECT json_extract(ENS_RECORD_JSON,'$.createdAt') as unix_time FROM ENS_NAMES
+        SELECT json_extract(ENS_RECORD_JSON,'$.createdAt') as unix_time FROM ens_names
         WHERE unix_time != 'NULL'
         ORDER BY unix_time DESC
         LIMIT 1;
@@ -80,7 +80,7 @@ def get_ens_text_subdomains(unix_time):
     # Loop through results here rather than storing as JSON
     for domain in response["data"]["domains"]:
         insert_template = """
-        INSERT INTO ENS_NAMES VALUES
+        INSERT INTO ens_names VALUES
             ('%s')
         """
         try:
@@ -89,16 +89,16 @@ def get_ens_text_subdomains(unix_time):
             s = str(e)
             print(file_name, domain["name"], "had an issue")
     con.commit()
-    return next_time
+    return next_time, len(response["data"]["domains"])
 
 print("Querying TheGraph for the next 1000 results")
-next_unix_time = get_ens_text_subdomains(0)
-
-got_error = True
-while got_error:
+next_unix_time, num_results= get_ens_text_subdomains(init_unix_time)
+print(num_results)
+while num_results == 1000:
     try:
         print("Querying TheGraph for the next 1000 results")
-        next_unix_time = get_ens_text_subdomains(init_unix_time)
+        next_unix_time, num_results = get_ens_text_subdomains(next_unix_time)
+        print(num_results)
     except Exception as e:
         s = str(e)
         print(s)
