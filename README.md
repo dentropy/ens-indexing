@@ -82,3 +82,25 @@ Takes the database setup from `./ScrapeTheGraphToSQLITE.py`, adds tables for res
 * We need to use JS for ethersjs but we do not need to use python so TheGraphToSQLITE.py can be rewritten in JS to reduce dependencies
 * Write scripts for people to use rather than exporting tables manually to CSV and JSON
 * This project does not support subdomains at this point
+
+## Bugs
+
+Not all inserts have gone through
+```
+{
+  query_ens_name: 'basindao.eth',
+  text_records: '["email","url","description","notice","keywords","com.twitter"]'
+}
+INSERT
+INSERT
+Error: SQLITE_ERROR: near "project": syntax error
+--> in Database#exec('                INSERT INTO ens_records_resolved                     (ens_name, sub_domain, ens_record_data) VALUES (                        "basindao.eth",                        "description",                         "basin is global DAO reducing/removing carbon, restoring/protecting nature and improving human health/wealth.  Also known as the "project developer" DAO, basin works at the real property level building and executing climate, nature and carbon projects with an emphasis on "core benefits" such as biodiversity, ecosystem services and climate resilience.    Our real asset projects create restoration, regeneration & conservation at scale, basin to basin.")', [Function (anonymous)])
+    at /home/paul/Projects/ens-indexing/node_modules/sqlite/build/Database.js:212:21
+    at new Promise (<anonymous>)
+    at Database.exec (/home/paul/Projects/ens-indexing/node_modules/sqlite/build/Database.js:210:16)
+    at file:///home/paul/Projects/ens-indexing/ResolveSubdomains.js:191:26 {
+  errno: 1,
+  code: 'SQLITE_ERROR',
+  __augmented: true
+}
+```
