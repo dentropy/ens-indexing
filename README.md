@@ -36,33 +36,61 @@ node ResolveSubdomains.js
 #### Saving data as CSV
 
 ``` bash
+# Export JSON and CSV of full database
+sqlite3 -header -csv ./ENS_RECORDS.db \
+  "select * from ens_names;" > ./out/ens_names.csv
+
+sqlite3 -header -csv ./ENS_RECORDS.db \
+  "select * from ens_records_resolved;" > ./out/ens_records_resolved.csv
+
+sqlite3  -json ./ENS_RECORDS.db \
+  "select * from ens_names;" > ./out/ens_names.json
+
+sqlite3 -json ./ENS_RECORDS.db \
+  "select * from ens_records_resolved;" > ./out/ens_records_resolved.json
+
+# Generate Sample JSON and CSV Data from database
+sqlite3 -header -csv ./ENS_RECORDS.db \
+  "select * from ens_names;" > ./sample/sample_ens_names.csv
+
+sqlite3 -header -csv ./ENS_RECORDS.db \
+  "select * from ens_records_resolved;" > ./sample/sample_ens_records_resolved.csv
+
+sqlite3  -json ./ENS_RECORDS.db \
+  "select * from ens_names;" >./sample/sample_ens_names.json
+
+sqlite3 -json ./ENS_RECORDS.db \
+  "select * from ens_records_resolved;" > ./sample/sample_ens_records_resolved.json
+```
+
+``` bash
 # Enter one line at a time
-sqlite
-.open ENS_RECORDS.db
-.mode csv
-.headers on
-.output ENS_NAMES.csv
-select * from ENS_NAMES;
-.output stdout
-.output ens_records_resolved.csv
+sqlite3
+.open ENS_RECORDS.db;
+.mode csv;
+.headers on;
+.output ens_names.csv;
+select * from ens_names;
+.output stdout;
+.output ens_records_resolved.csv;
 select * from ens_records_resolved;
-.output stdout
+.output stdout;
 ```
 
 #### Saving data as JSON
 
 ``` bash
 # Enter one line at a time
-sqlite
-.open ENS_RECORDS.db
-.mode json
-.headers on
-.output ENS_NAMES.json
+sqlite3
+.open ENS_RECORDS.db;
+.mode json;
+.headers on;
+.output ENS_NAMES.json;
 select * from ENS_NAMES;
-.output stdout
-.output ens_records_resolved.json
+.output stdout;
+.output ens_records_resolved.json;
 select * from ens_records_resolved;
-.output stdout
+.output stdout;
 ```
 
 ## Code Explanation
