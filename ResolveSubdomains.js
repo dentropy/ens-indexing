@@ -138,7 +138,7 @@ async function main(){
 (async () => {
     // open the database
     const db = await open({
-      filename: './out/ENS_RECORDS.db',
+      filename: './ENS_RECORDS.db',
       driver: sqlite3.Database
     })
 

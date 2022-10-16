@@ -4,7 +4,7 @@ import sqlite3
 import json
 from datetime import datetime
 
-con = sqlite3.connect("./out/ENS_RECORDS.db")
+con = sqlite3.connect("./ENS_RECORDS.db")
 cur = con.cursor()
 
 try:
