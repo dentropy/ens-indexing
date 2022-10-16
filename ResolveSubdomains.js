@@ -7,8 +7,8 @@ import { open } from 'sqlite'
 const SQLite3 = sqlite3.verbose();
 // const db = new SQLite3.Database('../TheGraphToSQLITE/ENS_RECORDS.db');
 
-
-const provider = new ethers.providers.JsonRpcProvider("https://mainnet.infura.io/v3/02f9493940cc44c295dfd149493e1cea");
+let JsonRpcProviderURL = "https://eth-mainnet.g.alchemy.com/v2/"
+const provider = new ethers.providers.JsonRpcProvider(JsonRpcProviderURL);
 
 async function create_tables(){
     db.serialize(() => {
@@ -43,7 +43,7 @@ async function create_tables(){
         // }
         // stmt.finalize();
 
-        // db.each("SELECT * FROM ENS_NAMES LIMIT 5", (err, row) => {
+        // db.each("SELECT * FROM ens_names LIMIT 5", (err, row) => {
         //     console.log(row);
         // });
     });
@@ -143,7 +143,7 @@ async function main(){
     })
 
     // Test a basic query
-    let query = "SELECT json_extract(ENS_RECORD_JSON,'$.name'), json_extract(ENS_RECORD_JSON,'$.resolver.texts') FROM  ENS_NAMES ORDER BY json_extract(ENS_RECORD_JSON,'$.name')"
+    let query = "SELECT json_extract(ENS_RECORD_JSON,'$.name'), json_extract(ENS_RECORD_JSON,'$.resolver.texts') FROM  ens_names ORDER BY json_extract(ENS_RECORD_JSON,'$.name')"
     const result = await db.get(query)
     console.log(result)
 
@@ -163,7 +163,7 @@ async function main(){
 
     const select_ens_name_metadata_query = "\
     SELECT json_extract(ENS_RECORD_JSON,'$.name') query_ens_name, json_extract(ENS_RECORD_JSON,'$.resolver.texts') text_records \
-    FROM  ENS_NAMES \
+    FROM  ens_names \
     WHERE \
         query_ens_name NOT IN  (SELECT DISTINCT ens_name FROM ens_records_resolved) AND \
         query_ens_name NOT IN  (SELECT DISTINCT ens_name FROM ens_records_resolved_errors) \
