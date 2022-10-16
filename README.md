@@ -36,6 +36,8 @@ node ResolveSubdomains.js
 #### Saving data as CSV
 
 ``` bash
+cp ./ENS_RECORDS.db /out/./ENS_RECORDS.db
+
 # Export JSON and CSV of full database
 sqlite3 -header -csv ./ENS_RECORDS.db \
   "select * from ens_names;" > ./out/ens_names.csv
@@ -61,6 +63,10 @@ sqlite3  -json ./ENS_RECORDS.db \
 
 sqlite3 -json ./ENS_RECORDS.db \
   "select * from ens_records_resolved;" > ./sample/sample_ens_records_resolved.json
+
+# Zip everything up for upload to S3
+zip full-ens-indexing.zip out/*
+zip sample-ens-indexing.zip sample/*
 ```
 
 ``` bash
