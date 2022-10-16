@@ -53,16 +53,16 @@ sqlite3 -json ./ENS_RECORDS.db \
 
 # Generate Sample JSON and CSV Data from database
 sqlite3 -header -csv ./ENS_RECORDS.db \
-  "select * from ens_names;" > ./sample/sample_ens_names.csv
+  "select * from ens_names LIMIT 1000;" > ./sample/sample_ens_names.csv
 
 sqlite3 -header -csv ./ENS_RECORDS.db \
-  "select * from ens_records_resolved;" > ./sample/sample_ens_records_resolved.csv
+  "select * from ens_records_resolved LIMIT 1000;" > ./sample/sample_ens_records_resolved.csv
 
 sqlite3  -json ./ENS_RECORDS.db \
-  "select * from ens_names;" >./sample/sample_ens_names.json
+  "select * from ens_names LIMIT 1000;" >./sample/sample_ens_names.json
 
 sqlite3 -json ./ENS_RECORDS.db \
-  "select * from ens_records_resolved;" > ./sample/sample_ens_records_resolved.json
+  "select * from ens_records_resolved LIMIT 1000;" > ./sample/sample_ens_records_resolved.json
 
 # Zip everything up for upload to S3
 zip full-ens-indexing.zip out/*
