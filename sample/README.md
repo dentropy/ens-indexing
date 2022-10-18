@@ -16,3 +16,7 @@ If you have any questions about this data or how it was generated you can contac
 
 dentropy@protonmail.com
 @dentropy:matrix.org
+
+## Tags
+
+ENS TheGraph SQLite CSV JSON
